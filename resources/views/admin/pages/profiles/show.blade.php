@@ -11,12 +11,12 @@
         <div class="card-header">Filters</div>
         <div class="card-body">
             <ul>
-                <li>Nome: {{ $permission->name }}</li>
+                <li>Nome: {{ $profile->name }}</li>
             </ul>
 
             @include('admin.includes.alerts')
 
-            <form action="{{ route('permissions.destroy', $permission->id) }}" method="POST">
+            <form action="{{ route('profiles.destroy', $profile->id) }}" method="POST">
                 @csrf
                 @method('DELETE')
                 <button type="submit" class="btn btn-danger">Deletar perfil</button>

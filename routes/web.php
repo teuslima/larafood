@@ -8,7 +8,17 @@ Route::prefix('admin')->namespace('Admin')->group(function(){
     
     
     /**
-     * Routers Permission Profiles
+     * Plan x Profile
+     */
+    Route::get('plans/{id}/profile/{idProfile}/detach', 'ACL\PlanProfileController@detachProfilePlan')->name('plans.profile.detach');
+    Route::post('plans/{id}/profiles/attach', 'ACL\PlanProfileController@attachProfilePlan')->name('plans.profiles.attach');
+    Route::get('plans/{id}/profiles/add', 'ACL\PlanProfileController@profilesAvailable')->name('plans.profiles.available');
+    Route::get('plans/{id}/profiles', 'ACL\PlanProfileController@profiles')->name('plans.profiles');
+    Route::get('profiles/{id}/plans', 'ACL\PlanProfileController@plans')->name('profiles.plans');
+    
+    
+    /**
+     * Permission x Profile
      */
     Route::get('profiles/{id}/permission/{idPermission}/detach', 'ACL\PermissionProfileController@detachPermissionProfile')->name('profiles.permissions.detach');
     Route::post('profiles/{id}/permissions/attach', 'ACL\PermissionProfileController@attachPermissionProfile')->name('profiles.permissions.attach');
@@ -62,3 +72,9 @@ Route::prefix('admin')->namespace('Admin')->group(function(){
 Route::get('/', function () {
     return view('welcome');
 });
+
+/**
+ * Auth Routes
+ */
+
+Auth::routes();
