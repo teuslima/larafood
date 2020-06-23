@@ -5,3 +5,9 @@
         @endforeach
     </div>
 @endif
+
+@if(isset($error))
+    <div class="alert alert-danger">
+        <p> {{ $error }}</p>
+    </div>
+@endif
