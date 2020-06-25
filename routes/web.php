@@ -10,6 +10,13 @@ Route::prefix('admin')
 
         
     /**
+     * Router Categories
+     */
+    Route::any('categories/search', 'CategoryController@search')->name('categories.search');
+    Route::resource('categories', 'CategoryController');
+
+        
+    /**
      * Router Users
      */
     Route::any('users/search', 'UserController@search')->name('users.search');
