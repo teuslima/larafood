@@ -15,7 +15,18 @@ class CreatePlanProfileTable extends Migration
     {
         Schema::create('plan_profile', function (Blueprint $table) {
             $table->id();
-            $table->timestamps();
+            $table->unsignedBigInteger('plan_id');
+            $table->unsignedBigInteger('profile_id');
+
+            $table->foreign('plan_id')
+                    ->references('id')
+                    ->on('plans')
+                    ->onDelete('cascade');
+
+            $table->foreign('profile_id')
+                    ->references('id')
+                    ->on('profiles')
+                    ->onDelete('cascade');
         });
     }
 

@@ -92,7 +92,7 @@ class CategoryController extends Controller
         }
 
         $category->update($request->all());
-        return redirect()->route('categories.index');return redirect()->route('plans.index');
+        return redirect()->route('categories.index');
     }
 
     /**
