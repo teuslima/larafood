@@ -9,7 +9,7 @@
 @section('content')
     <div class="card">
         <div class="card-body">
-            <form action="{{ route('permissions.update', $permission->id) }}" class="from" method="POST">
+            <form action="{{ route('profiles.update', $profile->id) }}" class="from" method="POST">
                 @method('PUT')
                 @include('admin.pages.permissions._partials.form')
             </form>
