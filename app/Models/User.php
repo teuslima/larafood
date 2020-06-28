@@ -58,5 +58,28 @@ class User extends Authenticatable
     public function tenant(){
         return $this->belongsTo(Tenant::class);
     }
+    
+    /**
+     * Get Roles
+     */
+    
+    public function roles(){
+        return $this->belongsToMany(Role::class);
+    }
 
+
+        
+    /**
+     * Roles not linked with this USer
+     */
+    public function rolesAvailable(){
+        $roles = Role::whereNotIn('roles.id', function($query){
+            $query->select('role_user.role_id');
+            $query->from('role_user');
+            $query->whereRaw("role_user.user_id={$this->id}");
+        })
+        ->paginate();
+        
+        return $roles;
+    }
 }
