@@ -6,6 +6,7 @@ use App\User;
 use Illuminate\Support\Str;
 use App\Services\TenantService;
 use App\Http\Controllers\Controller;
+use App\Tenant\Events\TenantCreated;
 use Illuminate\Support\Facades\Hash;
 use App\Providers\RouteServiceProvider;
 use Illuminate\Support\Facades\Validator;
@@ -55,8 +56,8 @@ class RegisterController extends Controller
             'name' => ['required', 'string', 'min:3', 'max:255'],
             'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
             'password' => ['required', 'string', 'min:6', 'max:16', 'confirmed'],
-            'cnpj' =>['required', 'unique:tenants'],
-            'empresa' =>['required', 'min:14', 'max:14', 'unique:tenants,name'],
+            'cnpj' =>['required', 'numeric', 'unique:tenants'],
+            'empresa' =>['required', 'min:3', 'max:255', 'unique:tenants,name'],
         ]);
     }
 
@@ -73,6 +74,8 @@ class RegisterController extends Controller
 
         $tenantService = app(TenantService::class);
         $user = $tenantService->make($plan, $data);
+
+        event(new TenantCreated($user));
 
         return $user;
     }
