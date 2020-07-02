@@ -16,14 +16,14 @@ class ProductService
         $this->productRepository = $productRepository;
     }
 
-    public function getCategoriesByUuid(string $uuid)
+    public function getCategoriesByUuid(string $uuid, array $categories)
     {
         $tenant = $this->tenantRepository->getTenantByUuid($uuid);
-        return $this->productRepository->getProductsByTenantId($tenant->id);
+        return $this->productRepository->getProductsByTenantId($tenant->id, $categories);
     }
 
-    // public function getCategoryByUrl(string $url)
-    // {
-    //     return $this->productRepository->getCategoryByUrl($url);
-    // }
+    public function getProductByFlag(string $flag)
+    {
+        return $this->productRepository->getProductByFlag($flag);
+    }
 }
