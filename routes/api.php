@@ -1,37 +1,39 @@
 <?php
 
 /**
+ * To Login
+ */
+
+Route::post('/sanctum/token', 'Api\Auth\AuthClientController@auth');
+
+Route::group([
+    'middleware' => ['auth:sanctum']
+], function(){
+    Route::get('auth/me', 'Api\Auth\AuthClientController@me');
+    Route::post('auth/logout', 'Api\Auth\AuthClientController@logout');
+
+});
+
+/**
  * Criar Versionamento de API
  */
-// Route::group([
-//     'prefix' => 'v1',
-//     'namespace' => 'Api'
-// ], function(){
-//     Route::get('/tenants/{uuid}', 'Api\TenantApiController@show');
-//     Route::get('/tenants', 'Api\TenantApiController@index');
+Route::group([
+    'prefix' => 'v1',
+    'namespace' => 'Api'
+], function(){
+    Route::get('/tenants/{uuid}', 'TenantApiController@show');
+    Route::get('/tenants', 'Api\TenantApiController@index');
     
-//     Route::get('/categories/{url}', 'Api\CategoryApiController@show');
-//     Route::get('/categories', 'Api\CategoryApiController@categoriesByTenant');
+    Route::get('/categories/{url}', 'CategoryApiController@show');
+    Route::get('/categories', 'Api\CategoryApiController@categoriesByTenant');
     
-//     Route::get('/tables/{identify}', 'Api\TableApiController@show');
-//     Route::get('/tables', 'Api\TableApiController@tablesByTenant');
+    Route::get('/tables/{identify}', 'TableApiController@show');
+    Route::get('/tables', 'TableApiController@tablesByTenant');
     
-//     Route::get('/products/{identify}', 'Api\ProductApiController@show');
+    Route::get('/products/{identify}', 'ProductApiController@show');
     
-//     Route::get('/products/{flag}', 'Api\ProductApiController@show');
-//     Route::get('/products', 'Api\ProductApiController@productByTenant');
-// });
+    Route::get('/products/{flag}', 'ProductApiController@show');
+    Route::get('/products', 'ProductApiController@productByTenant');
 
-Route::get('/tenants/{uuid}', 'Api\TenantApiController@show');
-Route::get('/tenants', 'Api\TenantApiController@index');
-
-Route::get('/categories/{url}', 'Api\CategoryApiController@show');
-Route::get('/categories', 'Api\CategoryApiController@categoriesByTenant');
-
-Route::get('/tables/{identify}', 'Api\TableApiController@show');
-Route::get('/tables', 'Api\TableApiController@tablesByTenant');
-
-Route::get('/products/{identify}', 'Api\ProductApiController@show');
-
-Route::get('/products/{flag}', 'Api\ProductApiController@show');
-Route::get('/products', 'Api\ProductApiController@productByTenant');
+    Route::post('/clients', 'Auth\RegisterController@store');
+});

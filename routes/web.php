@@ -1,7 +1,13 @@
 <?php
 
+use App\Models\Client;
 use Illuminate\Support\Facades\Route;
 
+Route::get('teste', function(){
+    $client = Client::first();
+    $token = $client->createToken('token-teste');
+    dd($token->plainTextToken);
+});
 
 Route::prefix('admin')
         ->namespace('Admin')
