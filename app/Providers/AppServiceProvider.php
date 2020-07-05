@@ -7,12 +7,16 @@ use App\Models\{
     Tenant,
     Category,
     Product,
+    Client,
+    Table,
 };
 use App\Observers\{
     PlanObserver,
     TenantObserver,
     CategoryObserver,
     ProductObserver,
+    ClientObserver,
+    TableObserver,
 };
 use Illuminate\Support\ServiceProvider;
 
@@ -39,5 +43,7 @@ class AppServiceProvider extends ServiceProvider
         Tenant::observe(TenantObserver::class);
         Category::observe(CategoryObserver::class);
         Product::observe(ProductObserver::class);
+        Client::observe(ClientObserver::class);
+        Table::observe(TableObserver::class);
     }
 }

@@ -30,6 +30,6 @@ class TableRepository implements TableRepositoryInterface
 
     public function getTableByIdentify(string $identify)
     {
-        return DB::table($this->table)->where('identify', $identify)->first();
+        return DB::table($this->table)->where('uuid', $identify)->first();
     }
 }
