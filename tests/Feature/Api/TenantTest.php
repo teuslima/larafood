@@ -1,6 +1,6 @@
 <?php
 
-namespace Tests\Feature;
+namespace Tests\Feature\Api;
 
 use Tests\TestCase;
 use App\Models\Tenant;
@@ -20,7 +20,7 @@ class TenantTest extends TestCase
 
         factory(Tenant::class, 10)->create();
 
-        $response = $this->get('/api/v1/tenants');
+        $response = $this->getJson('/api/v1/tenants');
 
         // $response->dump();
 
@@ -57,6 +57,6 @@ class TenantTest extends TestCase
 
         $response = $this->getJson("/api/v1/tenants/{$tenant->uuid}");
 
-        $response->assertStatus(201);
+        $response->assertStatus(200);
     }
 }
